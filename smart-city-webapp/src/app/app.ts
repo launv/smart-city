@@ -6,10 +6,11 @@ import { PremiseCameraSelector } from "./components/premise-camera-selector/prem
 import { AlertsPanel } from "./components/alerts-panel/alerts-panel";
 import { CameraGrid } from "./components/camera-grid/camera-grid";
 import { DispatchModal } from "./components/dispatch-modal/dispatch-modal";
+import { Toast } from "primeng/toast";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, MenubarModule, PremiseCameraSelector, AlertsPanel, CameraGrid, DispatchModal],
+  imports: [CommonModule, MenubarModule, PremiseCameraSelector, AlertsPanel, CameraGrid, DispatchModal, Toast],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   

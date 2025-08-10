@@ -1,18 +1,29 @@
-<p-card header="Cảnh báo thời gian thực" class="shadow-lg flex-grow">
+<p-card header="Cảnh báo thời gian thực" class="shadow-lg">
   <div class="flex flex-col gap-4 h-full">
     @if (store.alerts().length === 0) {
     <div class="text-center text-gray-500">Không có cảnh báo mới.</div>
     }
-    <div
-      *ngFor="let alert of store.alerts()"
-      class="p-4 rounded-lg bg-red-50 border-2 border-red-300"
+    <!--  -->
+    @for (alert of store.alerts(); track $index) {
+
+    <p-card
+      [style]="{
+        background: 'lavenderblush',
+        overflow: 'hidden',
+        border: '2px solid red'
+      }"
     >
+      <ng-template #title>
+        <b class="text-red-500">{{ alert.type | uppercase }}</b>
+      </ng-template>
       <div class="flex justify-between items-center">
         <div>
-          <p class="font-bold text-red-700">{{ alert.type | uppercase }}</p>
           <p class="text-sm text-gray-600">
-            {{ alert.timestamp | date : "short" }} tại {{ alert.location }}
+            {{ alert.timestamp | date : "short" }}
           </p>
+          <b>
+            {{ alert.location }}
+          </b>
         </div>
         <p-button
           label="Điều động"
@@ -20,6 +31,8 @@
           (onClick)="store.openDispatchModal(alert)"
         ></p-button>
       </div>
-    </div>
+    </p-card>
+
+    }
   </div>
 </p-card>

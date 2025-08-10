@@ -5,16 +5,16 @@
   [style]="{ width: '500px' }"
   (onHide)="store.closeDispatchModal()"
 >
-  <div *ngIf="store.selectedAlert()" class="p-4">
-    <p>
-      <strong>Cảnh báo:</strong> {{ store.selectedAlert()?.type | uppercase }}
-    </p>
-    <p>
-      <strong>Thời gian:</strong>
-      {{ store.selectedAlert()?.timestamp | date : "short" }}
-    </p>
-    <p><strong>Địa điểm:</strong> {{ store.selectedAlert()?.location }}</p>
-  </div>
+  @if (store.selectedAlert()) {
+  <p>
+    <strong>Cảnh báo:</strong> {{ store.selectedAlert()?.type | uppercase }}
+  </p>
+  <p>
+    <strong>Thời gian:</strong>
+    {{ store.selectedAlert()?.timestamp | date : "short" }}
+  </p>
+  <p><strong>Địa điểm:</strong> {{ store.selectedAlert()?.location }}</p>
+  }
 
   <div class="mt-4">
     <label for="guard-select" class="font-medium text-gray-700 block mb-2">
@@ -27,6 +27,8 @@
       optionLabel="name"
       optionValue="id"
       placeholder="Chọn bảo vệ"
+      class="w-full"
+      appendTo="body"
       (onChange)="store.setGuard($event.value)"
     />
   </div>
@@ -44,5 +46,3 @@
     ></p-button>
   </ng-template>
 </p-dialog>
-
-<p-toast></p-toast>
