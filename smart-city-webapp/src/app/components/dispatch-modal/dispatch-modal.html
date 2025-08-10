@@ -1,0 +1,48 @@
+<p-dialog
+  header="Điều động bảo vệ"
+  [visible]="store.dispatchModalVisible()"
+  [modal]="true"
+  [style]="{ width: '500px' }"
+  (onHide)="store.closeDispatchModal()"
+>
+  <div *ngIf="store.selectedAlert()" class="p-4">
+    <p>
+      <strong>Cảnh báo:</strong> {{ store.selectedAlert()?.type | uppercase }}
+    </p>
+    <p>
+      <strong>Thời gian:</strong>
+      {{ store.selectedAlert()?.timestamp | date : "short" }}
+    </p>
+    <p><strong>Địa điểm:</strong> {{ store.selectedAlert()?.location }}</p>
+  </div>
+
+  <div class="mt-4">
+    <label for="guard-select" class="font-medium text-gray-700 block mb-2">
+      Chọn bảo vệ
+    </label>
+
+    <p-select
+      [options]="store.guards()"
+      [(ngModel)]="store.selectedGuardId"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Chọn bảo vệ"
+      (onChange)="store.setGuard($event.value)"
+    />
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Hủy"
+      (onClick)="store.closeDispatchModal()"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      label="Gửi yêu cầu"
+      (onClick)="store.dispatchGuard()"
+      [disabled]="!store.canDispatch()"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

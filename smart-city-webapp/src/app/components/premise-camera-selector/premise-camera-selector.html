@@ -1,0 +1,21 @@
+<p-card header="Bộ chọn Camera" class="shadow-lg">
+  <div class="flex flex-col gap-4">
+    <p-select
+      [options]="store.premises()"
+      [(ngModel)]="store.selectedPremiseId"
+      (onChange)="store.selectPremise($event.value)"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Chọn cơ sở"
+    />
+
+    <p-multiselect
+      [options]="store.cameras()"
+      [(ngModel)]="selectedCameras"
+      optionLabel="name"
+      placeholder="Chọn camera (tối đa 4)"
+      [maxSelectedLabels]="3"
+      (onChange)="onCameraSelectChange($event.value)"
+    />
+  </div>
+</p-card>

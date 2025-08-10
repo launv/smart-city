@@ -1,0 +1,20 @@
+<p-card header="Video trực tiếp" class="shadow-lg h-full">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+    <div
+      *ngFor="let video of store.videoSlots()"
+      class="aspect-video bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center"
+    >
+      <video
+        *ngIf="video"
+        [src]="video.streamUrl"
+        autoplay
+        muted
+        controls
+        class="w-full h-full object-cover"
+      ></video>
+      <div *ngIf="!video" class="text-gray-500 font-semibold text-lg">
+        Chọn camera để xem
+      </div>
+    </div>
+  </div>
+</p-card>

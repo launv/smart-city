@@ -1,0 +1,25 @@
+<p-card header="Cảnh báo thời gian thực" class="shadow-lg flex-grow">
+  <div class="flex flex-col gap-4 h-full">
+    @if (store.alerts().length === 0) {
+    <div class="text-center text-gray-500">Không có cảnh báo mới.</div>
+    }
+    <div
+      *ngFor="let alert of store.alerts()"
+      class="p-4 rounded-lg bg-red-50 border-2 border-red-300"
+    >
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="font-bold text-red-700">{{ alert.type | uppercase }}</p>
+          <p class="text-sm text-gray-600">
+            {{ alert.timestamp | date : "short" }} tại {{ alert.location }}
+          </p>
+        </div>
+        <p-button
+          label="Điều động"
+          styleClass="p-button-danger p-button-sm"
+          (onClick)="store.openDispatchModal(alert)"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</p-card>
